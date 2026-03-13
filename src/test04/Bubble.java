@@ -30,7 +30,7 @@ public class Bubble extends JLabel {
         this.y = y;
     }
 
-
+    // DI
     public Bubble(Player player) {
         this.player = player;
         initData();
@@ -44,9 +44,9 @@ public class Bubble extends JLabel {
     private void setInitLayout() {
         x = player.getX();
         y = player.getY();
+        setIcon(bubbleIcon);
         setSize(50,50);
         setLocation(x,y);
         setVisible(true);
     }
 } // end of class
-

@@ -1,4 +1,4 @@
-package test05;
+package bubble;
 // 움직임 설정해주기
 public interface Moveable {
     void left();

@@ -42,7 +42,7 @@ public class BackgroundPlayerService implements Runnable {
             Color rightColor = new Color(image.getRGB(player.getX() + 60, player.getY() + 25));
 
             // 왼쪽 벽 충돌 감지 판단
-            if(isRed(leftColor)) {
+            if (isRed(leftColor)) {
                 // 충돌 상태 변수 ON
                 player.setLeftWallCrash(true);
                 player.setLeft(false); // while(false) 종료 --> 이동 멈춤 (Thread 종료)
@@ -52,7 +52,7 @@ public class BackgroundPlayerService implements Runnable {
             }
 
             // 오른쪽 벽 충돌 감지 판단
-            if(isRed(rightColor)) {
+            if (isRed(rightColor)) {
                 // 충돌 상태 변수 ON
                 player.setRightWallCrash(true); // 충돌 상태 ON
                 player.setRight(false);         // while(right) 종료 --> 이동 멈춤 Thread 종료
@@ -67,6 +67,7 @@ public class BackgroundPlayerService implements Runnable {
             }
         }
     }
+
     // 255, 0 , 0 -> 빨간색
     private boolean isRed(Color color) {
         return color.getRed() == 255

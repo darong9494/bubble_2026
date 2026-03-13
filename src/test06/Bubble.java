@@ -1,4 +1,4 @@
-package test05;
+package test06;
 
 import javax.swing.*;
 
@@ -114,9 +114,9 @@ public class Bubble extends JLabel implements Moveable {
     @Override
     public void up() {
         upMoving = true;
-        while(y > SCREEN_TOP) {
+        while (y > SCREEN_TOP) {
             y--;
-            setLocation(x,y);
+            setLocation(x, y);
             try {
                 Thread.sleep(BUBBLE_SPEED_MS);
             } catch (InterruptedException e) {

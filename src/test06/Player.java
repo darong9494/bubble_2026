@@ -1,5 +1,4 @@
-package test05;
-
+package test06;
 
 import javax.swing.*;
 
@@ -33,17 +32,19 @@ public class Player extends JLabel implements Moveable {
     // 플레이어 현재 방향 (enum 타입)
     // left() >> playerWay = PlayerWay.Left 변경
     // right() >> playerWay = PlayerWay.Right 변경
-    private PlayerWay playerWay= PlayerWay.RIGHT;
+    private PlayerWay playerWay = PlayerWay.RIGHT;
 
 
     /// getter
     @Override
     public int getX() {
-        return x; }
+        return x;
+    }
 
     @Override
     public int getY() {
-        return y; }
+        return y;
+    }
 
     public boolean isLeft() {
         return left;
@@ -189,7 +190,7 @@ public class Player extends JLabel implements Moveable {
     @Override
     public void up() {
         // 점프 기능을 어떻게 구현할까?
-        if(up) {
+        if (up) {
             return;
         }
         up = true;
@@ -202,7 +203,7 @@ public class Player extends JLabel implements Moveable {
                     y = y - JUMP_SPEED;
                     setLocation(x, y);
                     try {
-                        Thread.sleep(5); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
+                        Thread.sleep(3); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -213,25 +214,29 @@ public class Player extends JLabel implements Moveable {
         }).start();
     }
 
+    /**
+     * 낙하 변경(중력)
+     * for >> while(down) 으로 변경
+     * while(true) >> (down)
+     * BackgroundPlayerService가 바닥 감시
+     * setDown(false) 호출 >> down 상태값을 false 변경한다면 while(down)이 종료 >> 낙하종료
+     */
     @Override
     public void down() {
         down = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < JUMP_HEIGHT / JUMP_SPEED; i++) {
-                    y = y + JUMP_SPEED;
+                while (down) {
+                    y += JUMP_SPEED;
                     setLocation(x, y);
                     try {
-                        Thread.sleep(3); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
-                down = false;
             }
         }).start();
     }
 }
-
-

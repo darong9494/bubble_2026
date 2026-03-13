@@ -9,7 +9,6 @@ public class Bubble extends JLabel {
     private ImageIcon bubbleIcon;
     private Player player;
 
-
     // getter
     @Override
     public int getX() {
@@ -45,8 +44,8 @@ public class Bubble extends JLabel {
         x = player.getX();
         y = player.getY();
         setIcon(bubbleIcon);
-        setSize(50,50);
-        setLocation(x,y);
+        setSize(50, 50);
+        setLocation(x, y);
         setVisible(true);
     }
 } // end of class

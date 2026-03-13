@@ -1,4 +1,4 @@
-package test05;
+package test06;
 
 /**
  * [enum] 플레이어의 방향 상태

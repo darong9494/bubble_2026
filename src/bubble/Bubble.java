@@ -1,6 +1,12 @@
-package test05;
+package bubble;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
+
+@Getter
+@Setter
 
 public class Bubble extends JLabel implements Moveable {
     private int x;
@@ -19,25 +25,7 @@ public class Bubble extends JLabel implements Moveable {
     private boolean upMoving = false;
 
 
-    // getter
-    @Override
-    public int getX() {
-        return x;
-    }
 
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    // setter
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     // DI
     public Bubble(Player player) {
@@ -114,9 +102,9 @@ public class Bubble extends JLabel implements Moveable {
     @Override
     public void up() {
         upMoving = true;
-        while(y > SCREEN_TOP) {
+        while (y > SCREEN_TOP) {
             y--;
-            setLocation(x,y);
+            setLocation(x, y);
             try {
                 Thread.sleep(BUBBLE_SPEED_MS);
             } catch (InterruptedException e) {

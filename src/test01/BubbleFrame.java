@@ -25,7 +25,6 @@ public class BubbleFrame extends JFrame {
         setContentPane(backgroundMap);
 
         player = new Player();
-
     }
 
     private void setInitLayout() {
@@ -55,7 +54,6 @@ public class BubbleFrame extends JFrame {
                         break;
                 }
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
 

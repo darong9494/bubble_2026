@@ -5,5 +5,4 @@ public interface Moveable {
     void right();
     void up();
     void down();
-
 }

@@ -1,10 +1,11 @@
 package test03;
 
+
 import javax.swing.*;
 
-// 초기 설정
 public class Player extends JLabel implements Moveable {
-    // 플레이어의 현재 좌표 상태값
+
+    // 플레이어의 현재 좌표 상태 값
     private int x;
     private int y;
 
@@ -13,14 +14,13 @@ public class Player extends JLabel implements Moveable {
     private ImageIcon playerL;
 
     // 속도 상수
-    private final int SPEED = 4; //
-    private final int JUMP_SPEED = 2; // 점프 낙하 속도
-    private final int JUMP_HEIGHT = 130; // 점프 최대 높이
+    private final int SPEED = 4;           // 좌우 이동 속도 (픽셀)
+    private final int JUMP_SPEED = 2;      // 점프/낙하 속도
+    private final int JUMP_HEIGHT = 130;   // 점프 최대 높이
 
     // 이동 상태 플래그
-    // true = 해당 방향으로 이동중 (while 루프 조건)
-    // false = 멈춤 (while 루프 탈출 >> Thread 종료)
-
+    // true = 해당 방향으로 이동 중 (while 루프 조건)
+    // false = 멈춤 (while 루프 탈출 -> Thread 종료)
     private boolean left = false;
     private boolean right = false;
     private boolean up = false;
@@ -30,7 +30,7 @@ public class Player extends JLabel implements Moveable {
     private boolean leftWallCrash;
     private boolean rightWallCrash;
 
-    //getter
+    /// getter
     @Override
     public int getX() {
         return x;
@@ -65,8 +65,7 @@ public class Player extends JLabel implements Moveable {
         return rightWallCrash;
     }
 
-    // setter
-
+    /// setter
     public void setX(int x) {
         this.x = x;
     }
@@ -99,8 +98,6 @@ public class Player extends JLabel implements Moveable {
         this.rightWallCrash = rightWallCrash;
     }
 
-    // BubbleFrame의 Key 이벤트에서 호출할 수 있도록 setter 설정
-
 
     public Player() {
         initData();
@@ -125,7 +122,7 @@ public class Player extends JLabel implements Moveable {
     @Override
     public void left() {
         if (left) {
-            return; // 이미 이동중이면 중복 Thread 생성 방지
+            return;  // 이미 이동 중이면 중복 Thread 생성 방지
         }
         left = true;
         setIcon(playerL);
@@ -133,8 +130,8 @@ public class Player extends JLabel implements Moveable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // left가 true인 동안 계속 이동
-                // KeyReleased에서 setLeft(false)가 호출이 되면 while 탈출
+                // left 가 true 인 동안 계속 이동
+                // keyReleased 에서 setLeft(false) 가 호출이 되면 while 탈출
                 while (left) {
                     x = x - SPEED;
                     setLocation(x, y);
@@ -170,31 +167,30 @@ public class Player extends JLabel implements Moveable {
                 }
             }
         }).start();
-
     }
 
     @Override
     public void up() {
-        // 점프 기능을 어떻게 구현할까.
+        // 점프 기능을 어떻게 구현할까?
         if(up) {
             return;
         }
         up = true;
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // 130 / 2 >> 65 반복 65픽셀 업
+                // 130 / 2 --> 65 반복 65 픽셀 업
                 for (int i = 0; i < JUMP_HEIGHT / JUMP_SPEED; i++) {
                     y = y - JUMP_SPEED;
-                    setLocation(x,y);
+                    setLocation(x, y);
                     try {
-                        Thread.sleep(5); // 5ms 간격 (낙하보다 느리게 설정하기 3ms)
+                        Thread.sleep(5); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
-
-                up = false; // 최고점 도달 >> 점프상태 해제
+                up = false; // 최고점 도달 하고 -> 점프 상태 해제
                 down(); // 자동 낙하 시작
             }
         }).start();
@@ -208,9 +204,9 @@ public class Player extends JLabel implements Moveable {
             public void run() {
                 for (int i = 0; i < JUMP_HEIGHT / JUMP_SPEED; i++) {
                     y = y + JUMP_SPEED;
-                    setLocation(x,y);
+                    setLocation(x, y);
                     try {
-                        Thread.sleep(3); // 5ms 간격 (낙하보다 느리게 설정하기 3ms)
+                        Thread.sleep(3); // 5ms 간격 (낙하 보다 느리게 설정 낙하 3ms )
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -220,3 +216,5 @@ public class Player extends JLabel implements Moveable {
         }).start();
     }
 }
+
+

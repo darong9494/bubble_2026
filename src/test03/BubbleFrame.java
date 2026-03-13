@@ -19,7 +19,7 @@ public class BubbleFrame extends JFrame {
 
     private void initData() {
         setTitle("버블버블 게임");
-        setSize(1000, 640);
+        setSize(1000,640);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
@@ -54,7 +54,7 @@ public class BubbleFrame extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 // 방향키 코드를 Player의 이동 메서드 연결
-                switch (e.getKeyCode()) {
+                switch (e.getKeyCode()){
                     case KeyEvent.VK_LEFT:
                         // 이동 중이 아니고 AND 벽에 충돌하지 않은 상태일 때만 left() 호출 가능
                         if(player.isLeft() == false && player.isLeftWallCrash() == false) {
